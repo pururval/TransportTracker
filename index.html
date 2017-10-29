@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzLK-C_jik22yCDp6oOQg4nnbkC2DYA0&callback=initMap"></script>
+    <script src="app1.js"></script>
+</head>
+
+ <body>
+
+    <div style="width: 600px; height: 400px;" id="map"></div>
+
+    <p2 id="p1"></p2>             <br><br>
+    <input type="text" id="user"> <br><br>
+
+    <input type="text" id="info1" style="display:none" >
+    <input type="text" id="info2" style="display:none">
+
+    <button id="save_button">SAVE</button><br>
+    <!-- <button id="s_button">Refresh</button><br> -->
+
+<!-- FIREBASE PLUGIN -->
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script>// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBUAxH5ncwWUo4CruH4vSVtDxyij51kQqU",
+    authDomain: "geolocation-database.firebaseapp.com",
+    databaseURL: "https://geolocation-database.firebaseio.com",
+    projectId: "geolocation-database",
+    storageBucket: "geolocation-database.appspot.com",
+    messagingSenderId: "574078982721"
+  };
+  firebase.initializeApp(config);
+
+
+
+$('#save_button').click(function(){
+
+     var latNullTest = document.getElementById('info1').value
+     var longNullTest = document.getElementById('info2').value
+     var userNullTest = document.getElementById('user').value
+
+     if(latNullTest!="" || longNullTest!="" || userNullTest!="" ){
+       var rootRef = new firebase.database().ref().child('Buses/'+$('#user').val());
+       rootRef.set({
+         info1:$('#info1').val(),
+         info2:$('#info2').val()
+       })
+     }
+})
+  //   $('#s_button').click(function(){
+  // var userNullTest = document.getElementById('user').value
+  // console.log(""+userNullTest);
+  // })
+
+  </script>
+
+  </body>
+</html>

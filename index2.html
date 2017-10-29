@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Index2</title>
+  <meta charset="utf-8"/>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzLK-C_jik22yCDp6oOQg4nnbkC2DYA0&callback=initMap"></script>
+  <script src="app1.js"></script>
+ </head>
+
+ <body>
+  <p style="width: 600px; height: 400px;" id="map"></p>
+  <p2 id="p"></p2>     <br><br>
+  <p  id="p1"></p>     <br><br>
+
+  <input type="text" id="info1" >
+  <input type="text" id="info2" >
+<!-- style="display:none" -->
+
+  <button id="load_button">LOAD</button><br>
+
+<!-- FIREBASE PLUGIN -->
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<script>// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBUAxH5ncwWUo4CruH4vSVtDxyij51kQqU",
+    authDomain: "geolocation-database.firebaseapp.com",
+    databaseURL: "https://geolocation-database.firebaseio.com",
+    projectId: "geolocation-database",
+    storageBucket: "geolocation-database.appspot.com",
+    messagingSenderId: "574078982721"
+  };
+  firebase.initializeApp(config);
+
+  var rootRef = firebase.database().ref('Buses/').child('1');
+
+  $('#load_button').click(function(){
+      rootRef.on('value',function(snapshot){
+        $('#info1').val(snapshot.child('info1').val());
+        $('#info2').val(snapshot.child('info2').val());
+      });
+  })
+</script>
+
+</body>
+
+</html>
